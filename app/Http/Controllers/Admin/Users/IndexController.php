@@ -28,15 +28,7 @@ class IndexController extends Controller
 
     public function getData(Request $request)
     {
-        $params = new DataTableParamsData(
-            start: $request->input('start', 0),
-            length: $request->input('length', 10),
-            order: $request->input('order', []),
-            search: $request->input('search', []),
-            draw: $request->input('draw', 1)
-        );
-
-        // Call the table method from the repository
+        $params = DataTableParamsData::fromRequest($request);
         $data = $this->userRepository->table($params);
 
         return response()->json($data);

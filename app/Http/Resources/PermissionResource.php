@@ -6,7 +6,7 @@ use App\Helpers\DateTimeHelper as DTH;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class PermissionResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +17,8 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'firstName' => $this->first_name,
-            'lastName' => $this->last_name,
-            'email' => $this->email,
+            'name' => $this->name,
+            'guardName' => $this->guard_name,
             'createdAt' => DTH::formatDateTime($this->created_at),
         ];
     }

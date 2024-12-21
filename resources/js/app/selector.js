@@ -19,8 +19,10 @@ const gSelector = {
         },
         success: {
             general: '.js_modal_general_success'
-        }
+        },
+        editFormFields: '#modal_edit_form_fields',
+
     },
 }
 
-export {gSelector};
+export { gSelector };

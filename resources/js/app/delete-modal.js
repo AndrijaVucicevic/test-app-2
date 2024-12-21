@@ -1,9 +1,8 @@
-import { crud } from "../../../app/crud";
-import { gSelector } from "../../../app/selector";
-import { translate } from "../../../app/localisation";
+import { crud } from "./crud";
+import { gSelector } from "./selector";
+import { translate } from "./localisation";
 
-
-const removeUserModal = function (e) {
+const deleteModal = function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
 
@@ -47,5 +46,4 @@ const removeUserModal = function (e) {
     });
 }
 
-
-export { removeUserModal };
+export { deleteModal };

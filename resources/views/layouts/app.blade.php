@@ -55,6 +55,9 @@
 
     <script src="/js/app.js"></script>
 
+    @include('components.modal.modal-delete')
+    
+    @include('components.js.datatablesLanguageConfig')
     @include('layouts.base.page-scripts')
 
 </body>

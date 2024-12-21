@@ -49,5 +49,12 @@ return [
     'modal_delete_title' => 'ATTENTION',
     'confirm_delete_message' => 'Are you sure you want to delete this record?',
     'data_not_saved' => "An error occurred. Please try again.",
+    'data_saved' => 'Data saved successfully',
+    'modal_form_edit_title' => 'Edit the record',
 
+    'name' => 'Name',
+    'guard_name' => 'Guard Name',
+    'create_permission' => 'Create Permission',
+    'edit_permission' => 'Edit Permission',
+    
 ];

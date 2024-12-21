@@ -12,8 +12,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu" style="display: block;">
-                    <li><a href="../index.html"><i class="fa fa-circle-o"></i>{{__('messages.users')}}</a></li>
-                    <li><a href="../index2.html"><i class="fa fa-circle-o"></i> {{__('messages.permissions')}}</a></li>
+                    <li><a href="{{route('users.index')}}"><i class="fa fa-circle-o"></i>{{__('messages.users')}}</a></li>
+                    <li><a href="{{route('permissions.index')}}"><i class="fa fa-circle-o"></i> {{__('messages.permissions')}}</a></li>
                 </ul>
             </li>
             @endcan

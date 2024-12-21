@@ -1,4 +1,6 @@
 import { PageAdminUsers } from "./page/admin/users";
+import { PageAdminPermissions } from "./page/admin/permissions";
+import { PermissionService } from "./app/service";
 
 
 /*** General setup START ***/
@@ -8,7 +10,9 @@ $.ajaxSetup({
     },
 });
 window.API = {};
-
+API.service = {
+    permission: PermissionService,
+  };
 
 API.pageManager = {};
 
@@ -16,3 +20,4 @@ API.pageManager = {};
 
 /*** Init pages controllers ***/
 API.pageManager.users = PageAdminUsers;
+API.pageManager.permissions = PageAdminPermissions;
