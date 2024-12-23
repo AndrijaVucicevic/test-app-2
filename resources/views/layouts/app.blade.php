@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="{{ asset('adminlte/bower_components/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
 
-
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('adminlte/bower_components/select2/dist/css/select2.min.css') }}">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -52,11 +53,12 @@
     <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
     <script src="{{ asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-
+    <!-- Select2 -->
+    <script src="{{ asset('adminlte/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
     <script src="/js/app.js"></script>
 
     @include('components.modal.modal-delete')
-    
+
     @include('components.js.datatablesLanguageConfig')
     @include('layouts.base.page-scripts')
 

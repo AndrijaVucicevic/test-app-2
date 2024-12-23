@@ -39,6 +39,7 @@
     </div>
     <!-- /.row -->
 </section>
+
 @include('admin.permissions.js')
 @include('components.modal.modal-edit')
 

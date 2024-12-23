@@ -46,7 +46,7 @@
             pageLength: 10,
             lengthMenu: [10, 15, 25, 50],
             language: window.datatablesLanguageConfig
-            
+
         });
     });
 </script>

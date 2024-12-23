@@ -44,6 +44,8 @@ return [
     'password_confirmation' => 'Password Confirmation',
     'role' => 'Role',
     'select_role' => 'Select Role',
+    'select_users' => 'Select Users',
+    'select_permissions' => 'Select Permissions',
     'successfuly_updated' => 'Data successfuly updated',
 
     'modal_delete_title' => 'ATTENTION',
@@ -56,5 +58,7 @@ return [
     'guard_name' => 'Guard Name',
     'create_permission' => 'Create Permission',
     'edit_permission' => 'Edit Permission',
-    
+    'add_permission' => 'Add Permission',
+
+    'user_permissions' => 'User Permissions',
 ];

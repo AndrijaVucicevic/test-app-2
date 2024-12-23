@@ -8,6 +8,8 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Exception;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
@@ -65,5 +67,43 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         $columns = ['first_name', 'last_name', 'email', 'created_at'];
         return $columns[$columnIndex] ?? 'name';
+    }
+
+    public function userPermissions(User $user)
+    {
+        $search = request('search', '');
+        $page = request('page', 1);
+        $perPage = 10;
+
+        $query = Permission::select(
+            'permissions.id',
+            'permissions.name as text',
+            DB::raw("CASE WHEN model_has_permissions.permission_id IS NOT NULL THEN true ELSE false END AS selected")
+        )
+            ->leftJoin('model_has_permissions', function ($join) use ($user) {
+                $join->on('permissions.id', '=', 'model_has_permissions.permission_id')
+                    ->where('model_has_permissions.model_id', '=', $user->id)
+                    ->where('model_has_permissions.model_type', '=', get_class($user));
+            })
+            ->whereNull('model_has_permissions.permission_id')
+            ->when($search, function ($query, $search) {
+                $query->where('permissions.name', 'like', '%' . $search . '%');
+            });
+
+        $total = $query->count();
+        $permissions = $query
+            ->orderBy('selected', 'desc')
+            ->orderBy('permissions.name', 'asc')
+            ->offset(($page - 1) * $perPage)
+            ->limit($perPage)
+            ->get();
+
+        // Priprema podataka za Select2
+        $response = [
+            'results' => $permissions,
+            'count_filtered' => $total,
+        ];
+
+        return $response;
     }
 }

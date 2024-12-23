@@ -8,3 +8,8 @@
         API.pageManager.permissions.init()
     </script>
 @endif
+@if($currentRoute === 'users.edit')
+    <script>
+        API.pageManager.userEdit.init()
+    </script>
+@endif

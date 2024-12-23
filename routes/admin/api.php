@@ -6,5 +6,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/api/users/data', [UsersController::class, 'getData'])->name('users.data');
+    Route::get('/api/users/{user}/permissions', [UsersController::class, 'getPermissions'])->name('users.permisssions');
     Route::get('/api/permissions/data', [PermissionsController::class, 'getData'])->name('permissions.data');
 });
