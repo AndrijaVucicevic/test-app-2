@@ -59,7 +59,7 @@ return [
 
         'single' => [
             'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('logs/general/' . date('Y') . '/laravel-' . date('m') . '.log'),
             'level' => env('LOG_LEVEL', 'debug'),
         ],
 
@@ -116,6 +116,15 @@ return [
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
+        ],
+        'dblog' => [
+            'driver' => 'custom',
+            'via' => \App\Services\Log\DatabaseLogger::class,
+            'handler' => \App\Services\Log\DatabaseLoggingHandler::class,
+            'with' => [
+                'channel' => 'dblog'
+            ],
+            'level' => env('LOG_LEVEL', 'debug'),
         ],
     ],
 
