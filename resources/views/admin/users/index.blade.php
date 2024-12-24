@@ -38,6 +38,5 @@
     </div>
     <!-- /.row -->
 </section>
-@include('admin.users.js')
 
 @endsection

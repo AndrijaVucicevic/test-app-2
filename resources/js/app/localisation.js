@@ -2,12 +2,12 @@
  * app/localisation.js
  */
 
-function translate (key) {
+function translate(key) {
 
     let translations = {},
         translation = key;
 
-    $.extend(translations, translations, $("#js_translations").data());
+    $.extend(translations, translations, window.translations);
 
     if (translations.hasOwnProperty(key)) {
         translation = translations[key];
@@ -16,4 +16,4 @@ function translate (key) {
     return translation;
 }
 
-export { translate };
+export {translate};

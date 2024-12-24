@@ -44,6 +44,7 @@
         </footer>
     </div>
 
+    @include('layouts.base.translations')
     <!-- SCRIPTS -->
     <!-- jQuery -->
     <script src="{{ asset('adminlte/bower_components/jquery/dist/jquery.min.js') }}"></script>
@@ -51,15 +52,15 @@
     <script src="{{ asset('adminlte/bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('adminlte/dist/js/adminlte.min.js') }}"></script>
+
     <script src="{{ asset('adminlte/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('adminlte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <!-- Select2 -->
     <script src="{{ asset('adminlte/bower_components/select2/dist/js/select2.full.min.js') }}"></script>
+    
     <script src="/js/app.js"></script>
+    @include('components.modal.modal-delete') 
 
-    @include('components.modal.modal-delete')
-
-    @include('components.js.datatablesLanguageConfig')
     @include('layouts.base.page-scripts')
 
 </body>

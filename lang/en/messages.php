@@ -20,22 +20,6 @@ return [
     'created_at' => 'Created At',
     'actions' => 'Actions',
 
-    // DataTables translations
-    'datatables' => [
-        'lengthMenu' => 'Showing _MENU_ entries per page',
-        'zeroRecords' => 'No matching records found',
-        'info' => 'Showing page _PAGE_ of _PAGES_',
-        'infoEmpty' => 'No records available',
-        'infoFiltered' => '(filtered from _MAX_ total entries)',
-        'search' => 'Search:',
-        'paginate' => [
-            'first' => 'First',
-            'last' => 'Last',
-            'next' => 'Next',
-            'previous' => 'Previous'
-        ],
-    ],
-
     'create_user' => 'Create User',
     'edit_user' => 'Edit User',
     'validation_customer_user_exists' => 'Customer with the same email address already exists',
