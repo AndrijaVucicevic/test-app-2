@@ -40,6 +40,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'imports.delete', 'guard_name' => 'web']);
 
         Permission::firstOrCreate(['name' => PermissionEnum::UserManagement->value, 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'imports_order', 'guard_name' => 'web']);
 
         $user = Role::firstOrCreate([
             'name' => RoleEnum::User->value,

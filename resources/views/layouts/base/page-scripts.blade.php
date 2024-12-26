@@ -13,3 +13,8 @@
         API.pageManager.userEdit.init()
     </script>
 @endif
+@if($currentRoute === 'imports.create')
+    <script>
+        API.pageManager.imports.init()
+    </script>
+@endif

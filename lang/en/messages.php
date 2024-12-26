@@ -29,6 +29,8 @@ return [
     'role' => 'Role',
     'select_role' => 'Select Role',
     'select_users' => 'Select Users',
+    'select_file'   => 'Select File',
+    'select_type'   => 'Select Type',
     'select_permissions' => 'Select Permissions',
     'successfuly_updated' => 'Data successfuly updated',
 
@@ -45,4 +47,11 @@ return [
     'add_permission' => 'Add Permission',
 
     'user_permissions' => 'User Permissions',
+
+    'imports' => 'Imports',
+    'create_import' => 'Create Import',
+
+    'import_types' => [
+        'orders' => 'Import Orders'
+    ]
 ];

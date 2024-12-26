@@ -6,7 +6,6 @@ const PermissionService = {
             url: url,
             method: 'GET',
             error: function (response) {
-                // console.log('Ajax error');
             }
         });
     },
