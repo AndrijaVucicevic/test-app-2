@@ -4,7 +4,9 @@ return [
 
     'login_error_credentials' => 'These credentials do not match our records.',
     'menu_user_management' => 'User Management',
+    'menu_imported_data' => 'Imported Data',
     'users' => 'Users',
+    'orders' => 'Orders',
     'permissions' => 'Permissions',
     'btn_create' => 'Create',
     'btn_update' => 'Update',
@@ -53,5 +55,16 @@ return [
 
     'import_types' => [
         'orders' => 'Import Orders'
-    ]
+    ],
+
+    'order_date' => 'Order date',
+    'channel' => 'Channel',
+    'sku' => 'SKU',
+    'item_description' => 'Item description',
+    'origin' => 'Origin',
+    'so_num' => 'SO#',
+    'cost' => 'Cost',
+    'shipping_cost' => 'Shipping cost',
+    'total_price' => 'Total price',
+    
 ];

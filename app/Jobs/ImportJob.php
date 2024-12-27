@@ -2,10 +2,14 @@
 
 namespace App\Jobs;
 
+use App\Enums\Logger\ChannelEnum;
+use App\Enums\Logger\MessageEnum;
+use App\Events\ImportErrorOccurred;
 use App\Excel\GenericImport;
 use App\Http\Requests\Import\StoreRequest;
 use App\Models\DynamicConfig;
 use App\Models\ImportLog;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -36,32 +40,17 @@ class ImportJob implements ShouldQueue
             $array = explode('_', $this->type);
             $type = DynamicConfig::where("key", $array[0])->firstOrFail();
             $config = json_decode($type->value, true)['files'][$array[1]];
-            Log::alert('config', [$config]);
-            Log::alert('file', [$this->importLog->file_csv]);
             Excel::import(new GenericImport($config, $array[0], $this->importLog), $this->importLog->file_csv);
-        } catch (\Exception $e) {
-            Log::error("Greška prilikom importa: {$e->getMessage()}");
-            // Čuvanje greške u log tabeli
+        } catch (Exception $e) {
+
+            dblog()->critical(MessageEnum::EXCEPTION->message($e->getMessage()), [
+                ...ChannelEnum::EXCEPTION->log('import_job'),
+                'import_log_id' => $this->importLog->id
+            ]);
+
+            event(new ImportErrorOccurred($e));
+
         }
     }
 
-    protected function importData($data, $config)
-    {
-        foreach ($data as $row) {
-            $validator = Validator::make($row, $config['validation']);
-
-            if ($validator->fails()) {
-                // Log::error("Greška validacije: {$validator->errors()}");
-                // Čuvanje greške u log tabeli
-                continue;
-            }
-
-            $model = DB::table($this->type);
-            if ($config['update_or_create']) {
-                $model->updateOrInsert(['id' => $row['id']], $row);
-            } else {
-                $model->insert($row);
-            }
-        }
-    }
 }

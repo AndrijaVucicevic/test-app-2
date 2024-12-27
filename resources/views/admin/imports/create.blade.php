@@ -20,7 +20,7 @@
                                 <select name="import_type" id="select-type" class="form-control">
                                     <option value="">{{__('messages.select_type')}}</option>
                                     @foreach ($data as $type)
-                                    <option value="{{ $type['key'] }}_{{$type['file_key']}}" data-val="{{ $type['required_headers']}}">{{ $type['label'] }}</option>
+                                    <option value="{{$type['mainKey']}}" data-val="{{ $type['required_headers']}}">{{ $type['label'] }}</option>
                                     @endforeach
                                 </select>
                             </div>

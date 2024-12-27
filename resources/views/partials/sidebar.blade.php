@@ -17,6 +17,20 @@
                 </ul>
             </li>
             @endcan
+            @if(count($configFiles)>0)
+            <li class="treeview menu-open" style="height: auto;">
+                <a href="#">
+                    <i class="fa fa-users"></i> <span>{{__('messages.menu_imported_data')}}</span>
+                    <span class="pull-right-container">
+                        <i class=" fa-line-chart"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu" style="display: block;">
+                    @foreach($configFiles as $config)
+                    <li><a href="{{route('orders.index',['mainKey'=>$config['mainKey'])}}"><i class="fa fa-circle-o"></i>{{ $config['label'] }}</a></li>
+                    @endforeach
+                </ul>
+            </li>
             <li class="active">
                 <a href="widgets.html">
                     <i class="fa fa-th"></i> <span>Widgets</span>

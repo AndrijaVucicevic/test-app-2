@@ -3,6 +3,7 @@ import { PageAdminPermissions } from "./page/admin/permissions";
 import { PermissionService } from "./app/service";
 import { PageAdminEditUser } from "./page/admin/users/edit";
 import { PageImports } from "./page/imports";
+import { PageOrders } from "./page/admin/orders";
 /*** General setup START ***/
 $.ajaxSetup({
     headers: {
@@ -23,3 +24,4 @@ API.pageManager.users = PageAdminUsers;
 API.pageManager.permissions = PageAdminPermissions;
 API.pageManager.userEdit = PageAdminEditUser;
 API.pageManager.imports = PageImports;
+API.pageManager.orders = PageOrders;

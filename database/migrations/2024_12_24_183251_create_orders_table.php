@@ -22,6 +22,7 @@ return new class extends Migration
             $table->double('cost', 8, 2);
             $table->double('shipping_cost', 8, 2);
             $table->double('total_price', 8, 2);
+            $table->bigInteger('import_log_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

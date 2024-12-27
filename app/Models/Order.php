@@ -20,6 +20,7 @@ class Order extends Model
         'cost',
         'shipping_cost',
         'total_price',
+        'import_log_id'
     ];
 
 

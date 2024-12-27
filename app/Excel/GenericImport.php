@@ -36,8 +36,6 @@ class GenericImport implements ToCollection, WithHeadingRow, WithBatchInserts, W
         foreach ($rows as $index => $row) {
             $mappedRow = $this->mapHeaders($row->toArray());
 
-            Log::alert('aaaaa',[$row]);
-
             $validator = Validator::make($mappedRow, $this->config['validation']);
 
             if ($validator->fails()) {
@@ -59,11 +57,17 @@ class GenericImport implements ToCollection, WithHeadingRow, WithBatchInserts, W
                 $result = array_intersect_key($mappedRow, array_flip($this->config['update_or_create']));
                 $row = $model->where($result)->first();
                 if (!$row) {
+                    $mappedRow['import_log_id'] = $this->importLog->id;
                     $model->insert($mappedRow);
                 } else {
                     $before = $row->toArray();
                     $row->update($mappedRow);
-                    $after = $row->toArray();
+
+                    audit()->trackAttributes(class_basename(get_class($row))::class)->log(
+                        type: sprintf('Import job',),
+                        meta: ['before' => $before, 'after' => $row->toArray()],
+                        importLogId: $this->importLog->id,
+                    );
                 }
             } else {
                 $model->insert($mappedRow);
@@ -92,20 +96,20 @@ class GenericImport implements ToCollection, WithHeadingRow, WithBatchInserts, W
 
     public function batchSize(): int
     {
-        return 100; // Broj redova za batch
+        return 100;
     }
 
     public function chunkSize(): int
     {
-        return 100; // Broj redova po chunku
+        return 100;
     }
 
     protected function mapHeaders(array $row): array
     {
         $mapped = [];
         foreach ($this->config['headers_to_db'] as $dbColumn => $fileHeader) {
-            $header = strtolower(trim($fileHeader)); 
-            $header = str_replace(' ', '_', $header); 
+            $header = strtolower(trim($fileHeader));
+            $header = str_replace(' ', '_', $header);
 
             $mapped[$dbColumn] = trim($row[$header]) ?? null;
         }

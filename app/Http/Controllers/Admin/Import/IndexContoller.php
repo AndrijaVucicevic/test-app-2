@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Import;
 
 use App\Data\ImportLogData;
 use App\Enums\ImportStatusEnum;
+use App\Helpers\ImportConfigHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Import\StoreRequest;
 use App\Jobs\ImportJob;
@@ -22,7 +23,7 @@ class IndexContoller extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -30,20 +31,7 @@ class IndexContoller extends Controller
      */
     public function create()
     {
-        $importTypes = DynamicConfig::all();
-        foreach ($importTypes as $record) {
-            $key = $record->key;
-            $files = json_decode($record->value, true)['files'];
-
-            foreach ($files as $fileKey => $fileInfo) {
-                $data[] = [
-                    'key' => $key,
-                    'file_key' => $fileKey,
-                    'label' => __('messages.import_types.' . $key) . ' - ' . $fileInfo['label'],
-                    'required_headers' => implode(',', $fileInfo['required_headers']),
-                ];
-            }
-        }
+        $data = ImportConfigHelper::getFiles();
         return view('admin.imports.create', compact('data'));
     }
 
@@ -111,8 +99,4 @@ class IndexContoller extends Controller
         //
     }
 
-    public function getHeaders(string $header)
-    {
-        $imports = dynamicConfig($header);
-    }
 }

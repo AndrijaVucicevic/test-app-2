@@ -1,6 +1,9 @@
+
 <?php
 
 use App\Models\User;
+use App\Services\AuditService;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -25,5 +28,12 @@ if (!function_exists('user')) {
     function user(): ?User
     {
         return Auth::user();
+    }
+}
+
+if (!function_exists('audit')) {
+    function audit(): AuditService
+    {
+        return App::make(AuditService::class);
     }
 }

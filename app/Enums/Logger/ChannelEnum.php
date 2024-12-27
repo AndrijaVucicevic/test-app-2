@@ -10,6 +10,7 @@ enum ChannelEnum: string
 
     case USERS = 'users';
     case PERMISSIONS = 'permissions';
+    case EXCEPTION = 'exeption';
 
     public function name(): string
     {
@@ -35,6 +36,10 @@ enum ChannelEnum: string
             ],
             self::PERMISSIONS => [
                 'channel' => self::USERS->value,
+                'action' => $args[0],
+            ],
+            self::EXCEPTION => [
+                'channel' => self::EXCEPTION->value,
                 'action' => $args[0],
             ],
             default => ['channel' => $this->value]
