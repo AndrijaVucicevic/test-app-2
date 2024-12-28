@@ -2,19 +2,25 @@
 
 namespace App\Repositories;
 
-use App\Data\DataTableParamsData;
-use App\Http\Resources\PermissionResource;
+
+use App\Models\ImportLog;
 use App\Repositories\Interfaces\ImportRepositoryInterface;
-use App\Repositories\Interfaces\PermissionRepositoryInterface;
-use Exception;
-use Spatie\Permission\Models\Permission;
 
 class ImportRepository extends BaseRepository implements ImportRepositoryInterface
 {
-    public function __construct(Permission $permissionModel)
+    public function __construct(ImportLog $importLog)
     {
-        parent::__construct($permissionModel);
+        parent::__construct($importLog);
     }
 
- 
+    public function table()
+    {
+        $query = $this->model->newQuery()
+            ->select('import_logs.*')
+            ->with('user')
+            ->orderBy('id', 'desc')
+            ->paginate()->appends(request()->query());
+
+        return $query;
+    }
 }

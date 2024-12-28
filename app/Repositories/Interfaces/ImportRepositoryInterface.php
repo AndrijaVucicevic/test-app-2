@@ -8,6 +8,6 @@ use App\Models\User;
 
 interface ImportRepositoryInterface extends BaseRepositoryInterface
 {
-    // public function table(DataTableParamsData $params);
+    public function table();
 
 }

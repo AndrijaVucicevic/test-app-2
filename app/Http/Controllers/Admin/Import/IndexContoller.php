@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Import;
 
+use App\Data\DataTableParamsData;
 use App\Data\ImportLogData;
 use App\Enums\ImportStatusEnum;
 use App\Helpers\ImportConfigHelper;
@@ -9,21 +10,28 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Import\StoreRequest;
 use App\Jobs\ImportJob;
 use App\Models\DynamicConfig;
-use App\Models\Import;
+use App\Models\ImportLog;
+use App\Repositories\Interfaces\ImportRepositoryInterface;
 use App\Services\Import\CreateImportLogService;
+use App\Services\Import\DownloadImportService;
 use Illuminate\Http\Request;
 
 class IndexContoller extends Controller
 {
     public function __construct(
-        private readonly CreateImportLogService $createImportLogService
+        private readonly CreateImportLogService $createImportLogService,
+        private readonly ImportRepositoryInterface $importRepository,
+        private readonly DownloadImportService $downloadImportService
     ) {}
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
+        $records = $this->importRepository->table();
+        $records = ImportLogData::collection($records)->items();
+
+        return view('admin.imports.index', compact('records'));
     }
 
     /**
@@ -99,4 +107,19 @@ class IndexContoller extends Controller
         //
     }
 
+    public function download(ImportLog $importLog)
+    {
+        if (
+            !$importLog ||
+            in_array(
+                $importLog->status,
+                [ImportStatusEnum::IN_PROGRESS->value, ImportStatusEnum::SUCCESS->value]
+            )
+        ) {
+            return redirect()->back();
+        }
+
+        $this->downloadImportService->execute($importLog);
+        return '';
+    }
 }

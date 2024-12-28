@@ -10,6 +10,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('users', UsersController::class)->except('show');
     Route::put('/users/{user}/permissions', [UsersController::class, 'updatePermissions'])->name('users.permissions');
     Route::resource('permissions', PermissionsController::class)->except('show');
-    Route::resource('imports', ImportController::class)->only(['create', 'store']);
+    Route::resource('imports', ImportController::class)->only(['index', 'create', 'store']);
     Route::resource('orders', OrderController::class)->only(['index', 'show']);
+
+    Route::get('/imports/{importLog}/file/download', [ImportController::class, 'download'])->name('imports-download');
 });

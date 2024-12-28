@@ -15,5 +15,10 @@ class GlobalComposer
         $view->with('currentRoute', Route::currentRouteName());
         $view->with('user', Auth::user());
         $view->with('configFiles', ImportConfigHelper::getFiles());
+        $view->with('fnOrdinalNumber', function (int $i) {
+            $page = request()->get('page') ?? 1;
+            $page--;
+            return $page * 15 + ++$i;
+        });
     }
 }

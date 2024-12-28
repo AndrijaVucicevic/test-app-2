@@ -6,6 +6,7 @@ return [
     'menu_user_management' => 'User Management',
     'menu_imported_data' => 'Imported Data',
     'users' => 'Users',
+    'user' => 'User',
     'orders' => 'Orders',
     'permissions' => 'Permissions',
     'btn_create' => 'Create',
@@ -66,5 +67,9 @@ return [
     'cost' => 'Cost',
     'shipping_cost' => 'Shipping cost',
     'total_price' => 'Total price',
-    
+    'status' => 'Status',
+    'file' => 'File',
+    'error_file' => 'File error',
+    'notes' => 'Note',
+    'download' => 'Download'
 ];

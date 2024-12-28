@@ -27,16 +27,14 @@
                 </a>
                 <ul class="treeview-menu" style="display: block;">
                     @foreach($configFiles as $config)
-                    <li><a href="{{route('orders.index',['mainKey'=>$config['mainKey'])}}"><i class="fa fa-circle-o"></i>{{ $config['label'] }}</a></li>
+                    <li><a href="{{route('orders.index',['mainKey'=>$config['mainKey']])}}"><i class="fa fa-circle-o"></i>{{ $config['label'] }}</a></li>
                     @endforeach
                 </ul>
             </li>
+            @endif
             <li class="active">
-                <a href="widgets.html">
-                    <i class="fa fa-th"></i> <span>Widgets</span>
-                    <span class="pull-right-container">
-                        <small class="label pull-right bg-green">new</small>
-                    </span>
+                <a href="{{route('imports.index')}}">
+                    <i class="fa fa-th"></i> <span>{{__('messages.imports')}}</span>
                 </a>
             </li>
         </ul>

@@ -9,9 +9,9 @@ class ImportConfigHelper
 {
 
 
-    public static function getFiles()
+    public static function getFiles(): array
     {
-
+        $data = [];
         $importTypes = DynamicConfig::all();
         foreach ($importTypes as $record) {
             $key = $record->key;
@@ -27,5 +27,6 @@ class ImportConfigHelper
                 ];
             }
         }
+        return $data;
     }
 }
