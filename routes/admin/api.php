@@ -10,7 +10,6 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/api/users/data', [UsersController::class, 'getData'])->name('users.data');
     Route::get('/api/users/{user}/permissions', [UsersController::class, 'getPermissions'])->name('users.permisssions');
     Route::get('/api/permissions/data', [PermissionsController::class, 'getData'])->name('permissions.data');
-    Route::get('/api/orders/data', [OrdersController::class, 'getData'])->name('orders.data');
     
     Route::get('/api/imports/{importType}/headers', [ImportController::class, 'getHeaders'])->name('imports.headers');
 });

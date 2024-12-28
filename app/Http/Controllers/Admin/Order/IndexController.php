@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin\Order;
 
 use App\Data\DataTableParamsData;
+use App\Data\OrderData;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class IndexController extends Controller
 {
@@ -17,16 +20,10 @@ class IndexController extends Controller
      */
     public function index()
     {
-        return view('admin.orders.index');
+        $records = OrderData::collection($this->orderRepository->table())->items();
+        return view('admin.orders.index', compact('records'));
     }
 
-    public function getData(Request $request)
-    {
-        $params = DataTableParamsData::fromRequest($request);
-        $data = $this->orderRepository->table($params);
-
-        return response()->json($data);
-    }
     /**
      * Show the form for creating a new resource.
      */
@@ -70,8 +67,13 @@ class IndexController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Order $order)
     {
-        //
+        try {
+            $order->delete();
+            return response()->json([], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json(['message' => __('messages.data_not_saved')], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }
