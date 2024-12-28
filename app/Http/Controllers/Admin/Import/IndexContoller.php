@@ -8,6 +8,7 @@ use App\Enums\ImportStatusEnum;
 use App\Helpers\ImportConfigHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Import\StoreRequest;
+use App\Http\Resources\ImportLogResource;
 use App\Jobs\ImportJob;
 use App\Models\DynamicConfig;
 use App\Models\ImportLog;
@@ -15,6 +16,7 @@ use App\Repositories\Interfaces\ImportRepositoryInterface;
 use App\Services\Import\CreateImportLogService;
 use App\Services\Import\DownloadImportService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class IndexContoller extends Controller
 {
@@ -86,9 +88,9 @@ class IndexContoller extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(ImportLog $import)
     {
-        //
+        return response()->json(['importLog' => ImportLogResource::make($import)], Response::HTTP_OK);
     }
 
     /**

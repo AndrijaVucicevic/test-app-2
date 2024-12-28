@@ -25,15 +25,15 @@
                             <td class="text-center"> {!! \App\Enums\ImportStatusEnum::tryFrom($record->status)->iconHtml() !!} </td>
                             <td class="text-center"> @if(!empty($record->file_error_csv))
                                 <a href="{{route('imports-download',['importLog'=>$record->id])}}"
-                                    class="js_btn_remove_user px-2">
+                                    class="px-2">
                                     {{__('messages.download')}}
                                 </a>
                                 @endif
                             </td>
                             <td class="text-center">
                                 <div class="d-flex justify-content-center">
-                                    <a href=""
-                                        class="js_btn_remove_user px-2">
+                                    <a href="{{route('imports.edit',['import'=>$record->id])}}"
+                                        class="js_btn_show_config px-2">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </div>
@@ -53,5 +53,5 @@
     </div>
     <!-- /.row -->
 </section>
-
+@include('components.modal.modal-import-config')
 @endsection

@@ -23,3 +23,8 @@
     API.pageManager.orders.init()
 </script>
 @endif
+@if($currentRoute === 'imports.index')
+<script>
+    API.pageManager.importLog.init()
+</script>
+@endif

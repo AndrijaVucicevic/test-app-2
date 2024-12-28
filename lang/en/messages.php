@@ -73,5 +73,6 @@ return [
     'file' => 'File',
     'error_file' => 'File error',
     'notes' => 'Note',
-    'download' => 'Download'
+    'download' => 'Download',
+    'import_config' => 'Import config'
 ];
