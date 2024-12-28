@@ -42,15 +42,13 @@ class ImportJob implements ShouldQueue
             $config = json_decode($type->value, true)['files'][$array[1]];
             Excel::import(new GenericImport($config, $array[0], $this->importLog), $this->importLog->file_csv);
         } catch (Exception $e) {
-
+            Log::error('eee', [$e->getMessage(), $e->getFile()]);
             dblog()->critical(MessageEnum::EXCEPTION->message($e->getMessage()), [
                 ...ChannelEnum::EXCEPTION->log('import_job'),
                 'import_log_id' => $this->importLog->id
             ]);
 
             event(new ImportErrorOccurred($e));
-
         }
     }
-
 }

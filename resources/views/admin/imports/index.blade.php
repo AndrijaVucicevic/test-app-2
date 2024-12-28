@@ -7,6 +7,11 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">{{__('messages.imports')}}</h3>
+                    <div class="box-tools pull-right">
+                        <a href="{{ route('imports.create') }}" class="btn btn-success btn-sm">
+                            {{ __('messages.btn_create') }}
+                        </a>
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

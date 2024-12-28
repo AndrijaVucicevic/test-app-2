@@ -44,6 +44,7 @@ class AuditService implements AuditServiceInterface
     public function log(
         string      $type,
         array       $meta = [],
+        int         $ownerId,
         int|null    $userId = null,
         int|null    $orderId = null,
         int|null    $importLogId = null,
@@ -65,7 +66,7 @@ class AuditService implements AuditServiceInterface
             'action_type' => $type,
             'meta' => $meta,
             'meta_html' => $metaHtml ?? '',
-            'owner' => user()?->id,
+            'owner' => $ownerId,
             'user_id' => $userId,
             'orderId' => $orderId,
         ]);

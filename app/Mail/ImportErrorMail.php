@@ -40,6 +40,7 @@ class ImportErrorMail extends Mailable
     {
         return new Content(
             view: 'mail.import-error',
+            with: ['errorMsg' => $this->errorMsg]
         );
     }
 

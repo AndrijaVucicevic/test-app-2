@@ -2,6 +2,7 @@
 
 namespace App\Excel;
 
+use App\Enums\ConfigModelEnum;
 use App\Models\ImportLog;
 use App\Services\Import\SaveImportLogService;
 use Illuminate\Support\Facades\Config;
@@ -52,20 +53,23 @@ class GenericImport implements ToCollection, WithHeadingRow, WithBatchInserts, W
                 continue;
             }
 
-            $model = DB::table($this->type);
+            $model = ConfigModelEnum::tryFrom($this->type)?->getModel();
             if (count($this->config['update_or_create']) > 0) {
                 $result = array_intersect_key($mappedRow, array_flip($this->config['update_or_create']));
-                $row = $model->where($result)->first();
+
+                $row = $model->where($result)->get()->first();
                 if (!$row) {
                     $mappedRow['import_log_id'] = $this->importLog->id;
-                    $model->insert($mappedRow);
+                    $model->create($mappedRow);
                 } else {
+
                     $before = $row->toArray();
                     $row->update($mappedRow);
 
-                    audit()->trackAttributes(class_basename(get_class($row))::class)->log(
+                    audit()->trackAttributes($model::class)->log(
                         type: sprintf('Import job',),
                         meta: ['before' => $before, 'after' => $row->toArray()],
+                        ownerId: $this->importLog->user_id,
                         importLogId: $this->importLog->id,
                     );
                 }
