@@ -17,6 +17,8 @@ return [
     'btn_save' => 'Save',
     'btn_close' => 'Close',
     'btn_confirm' => 'Confirm',
+    'btn_search' => 'Search',
+    'btn_export' => 'Export',
     'user_first_name' => 'First Name',
     'user_last_name' => 'Last Name',
     'email' => 'Email',

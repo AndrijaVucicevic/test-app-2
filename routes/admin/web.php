@@ -11,7 +11,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::put('/users/{user}/permissions', [UsersController::class, 'updatePermissions'])->name('users.permissions');
     Route::resource('permissions', PermissionsController::class)->except('show');
     Route::resource('imports', ImportController::class)->only(['index', 'create', 'store']);
-    Route::resource('orders', OrderController::class)->only(['index', 'show','destroy']);
+    Route::resource('orders', OrderController::class)->only(['index', 'destroy']);
 
     Route::get('/imports/{importLog}/file/download', [ImportController::class, 'download'])->name('imports-download');
 });

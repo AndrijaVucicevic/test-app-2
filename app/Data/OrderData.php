@@ -3,6 +3,7 @@
 namespace App\Data;
 
 use App\Helpers\DateTimeHelper;
+use App\Helpers\NumberHelper;
 use Spatie\LaravelData\Attributes\MapInputName;
 use Spatie\LaravelData\Data;
 
@@ -30,5 +31,8 @@ class OrderData extends Data
     ) {
         $this->orderDate = DateTimeHelper::formatDateTime($this->orderDate, 'Y-m-d');
         $this->createdAt = DateTimeHelper::formatDateTime($this->createdAt);
+        $this->cost = NumberHelper::webFormatFloat($this->cost);
+        $this->shippingCost = NumberHelper::webFormatFloat($this->shippingCost);
+        $this->totalPrice = NumberHelper::webFormatFloat($this->totalPrice);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Data\DataTableParamsData;
+use App\Filters\OrdersSearchFilter;
 use App\Http\Resources\OrderResource;
 use App\Models\ImportLog;
 use App\Models\Order;
@@ -16,17 +17,18 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         parent::__construct($order);
     }
 
-    public function table()
+    public function table(OrdersSearchFilter $filter)
     {
         $query = $this->model->newQuery()
             ->select('orders.*');
-        $this->applySearchFilter($query, '');
+        if ($filter->filterSearch != '') {
+            $this->applySearchFilter($query, $filter->filterSearch);
+        }
 
         if (request()->has('mainKey')) {
             $query = $query->whereIn('import_log_id', $this->getImportLogsFromKey(request()->get('mainKey')));
         }
-        return $query->orderBy('id', 'desc')
-            ->paginate()->appends(request()->query());
+        return $query->orderBy('id', 'desc');
     }
 
     private function applySearchFilter($query, $searchValue)

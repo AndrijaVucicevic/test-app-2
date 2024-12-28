@@ -2,26 +2,32 @@
 
 namespace App\Http\Controllers\Admin\Order;
 
-use App\Data\DataTableParamsData;
 use App\Data\OrderData;
+use App\Filters\OrdersSearchFilter;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Repositories\Interfaces\OrderRepositoryInterface;
+use App\Services\Order\ExportService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class IndexController extends Controller
 {
     public function __construct(
-        private readonly OrderRepositoryInterface $orderRepository
+        private readonly OrderRepositoryInterface $orderRepository,
+        private readonly OrdersSearchFilter $filter,
+        private readonly ExportService $exportService
     ) {}
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $records = OrderData::collection($this->orderRepository->table())->items();
-        return view('admin.orders.index', compact('records'));
+        if (request()->has('action') && request()->get('action') == 'export') {
+            return $this->exportService->execute($this->filter, $this->orderRepository);
+        }
+        $records = OrderData::collection($this->orderRepository->table($this->filter)->paginate()->appends(request()->query()))->items();
+        return view('admin.orders.index', compact('records'), ['filter' => $this->filter]);
     }
 
     /**

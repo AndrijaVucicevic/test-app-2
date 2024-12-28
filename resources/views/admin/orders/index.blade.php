@@ -10,6 +10,27 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
+                    <form method="GET" action="" class="form">
+
+                        <div class="form-row">
+
+                            <div class="form-group col-md-1">
+                                <input type="search" class="form-control" name="filter_search" value="{{$filter->filterSearch}}">
+                            </div>
+                            <div class="form-group col-md-1">
+                                <input type="submit" class="btn btn-success btn-sm form-control" name="action" value="search" style="background: #3c8dbc;"
+                                    value="{{ __('messages.btn_search') }}">
+                            </div>
+                            <div class="form-group col-md-1">
+                                <input type="submit" class="btn btn-success btn-sm form-control" name="action" value="export" style="background: #3c8dbc;"
+                                    value="{{ __('messages.btn_exoirt') }}">
+
+                            </div>
+                            <input type="hidden" name="mainKey" value="{{$filter->mainKey}}" />
+                        </div>
+
+                    </form>
+
                     <table class="table table-bordered">
                         <tr>
                             <th>#</th>
