@@ -74,7 +74,7 @@ class IndexContoller extends Controller
         $newImportReport->update(['file_csv' => $filePath, 'config' => $config]);
 
         ImportJob::dispatch($newImportReport);
-        return redirect()->route('imports.create')->with('success', __('messages.data_saved'));
+        return redirect()->route('imports.create')->with('warning', __('messages.import_in_progress'));
     }
 
     /**

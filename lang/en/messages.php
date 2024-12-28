@@ -74,5 +74,7 @@ return [
     'error_file' => 'File error',
     'notes' => 'Note',
     'download' => 'Download',
-    'import_config' => 'Import config'
+    'import_config' => 'Import config',
+    'import_in_progress' => 'Import is being done in the background. This operation might take a while.',
+
 ];
