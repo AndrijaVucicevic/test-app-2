@@ -76,5 +76,11 @@ return [
     'download' => 'Download',
     'import_config' => 'Import config',
     'import_in_progress' => 'Import is being done in the background. This operation might take a while.',
-
+    'table_total' => 'Total',
+    'audit_col_meta' => 'Meta data',
+    'type' => 'Type',
+    'order_history' => 'Order history',
+    'attribute' => 'ATTRIBUTE',
+    'old_value' => 'OLD VALUE',
+    'new_value' => 'NEW VALUE'
 ];

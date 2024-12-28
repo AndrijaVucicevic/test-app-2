@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Order;
 
+use App\Data\LogItemData;
 use App\Data\OrderData;
 use App\Filters\OrdersSearchFilter;
 use App\Http\Controllers\Controller;
@@ -81,5 +82,13 @@ class IndexController extends Controller
         } catch (\Exception $e) {
             return response()->json(['message' => __('messages.data_not_saved')], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public function history(Order $order)
+    {
+        return view('admin.orders.history', [
+            'order' => $order,
+            'records' => LogItemData::collection($order->auditLogs),
+        ]);
     }
 }

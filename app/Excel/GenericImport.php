@@ -67,10 +67,11 @@ class GenericImport implements ToCollection, WithHeadingRow, WithBatchInserts, W
                     $row->update($mappedRow);
 
                     audit()->trackAttributes($model::class)->log(
-                        type: sprintf('Import job',),
+                        type: sprintf('Import job'),
                         meta: ['before' => $before, 'after' => $row->toArray()],
                         ownerId: $this->importLog->user_id,
                         importLogId: $this->importLog->id,
+                        orderId: $row->id
                     );
                 }
             } else {

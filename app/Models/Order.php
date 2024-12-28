@@ -28,4 +28,9 @@ class Order extends Model
     {
         return $this->hasOne(Product::class, 'sku', 'sku');
     }
+
+    public function auditLogs()
+    {
+        return $this->hasMany(AuditLog::class, 'order_id', 'id');
+    }
 }

@@ -7,7 +7,7 @@ namespace App\Services;
 use App\Enums\Audit\TrackingAttributeEnum;
 use App\Interfaces\AuditServiceInterface;
 use App\Models\AuditLog;
-
+use Illuminate\Support\Facades\Log;
 
 class AuditService implements AuditServiceInterface
 {
@@ -68,7 +68,7 @@ class AuditService implements AuditServiceInterface
             'meta_html' => $metaHtml ?? '',
             'owner' => $ownerId,
             'user_id' => $userId,
-            'orderId' => $orderId,
+            'order_id' => $orderId,
         ]);
     }
 

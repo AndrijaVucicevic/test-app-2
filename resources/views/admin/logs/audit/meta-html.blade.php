@@ -1,9 +1,9 @@
 <table class="ob-audit-table table table-sm table-striped">
     <thead class="ob-bg text-white align-middle text-center">
     <tr>
-        <th>ATRIBUT</th>
-        <th class="col-md-2">STARA VREDNOST</th>
-        <th class="col-md-2">NOVA VREDNOST</th>
+        <th>{{__('messages.attribute')}}</th>
+        <th class="col-md-2">{{__('messages.old_value')}}</th>
+        <th class="col-md-2">{{__('messages.new_value')}}</th>
     </tr>
     </thead>
     <tbody>

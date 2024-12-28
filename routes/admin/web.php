@@ -14,4 +14,5 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('orders', OrderController::class)->only(['index', 'destroy']);
 
     Route::get('/imports/{importLog}/file/download', [ImportController::class, 'download'])->name('imports-download');
+    Route::get('/orders/{order}/history', [OrderController::class, 'history'])->name('orders-history');
 });

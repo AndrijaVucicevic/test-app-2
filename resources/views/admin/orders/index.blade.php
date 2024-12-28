@@ -61,11 +61,11 @@
                             <td class="text-center"> {{ $record->createdAt }}</td>
                             <td class="text-center">
                                 <div class="d-flex justify-content-center">
-                                    <a href=""
-                                        class="js_btn_remove_user px-2">
+                                    <a href="{{route('orders-history',['order'=>$record->id])}}"
+                                        class="px-2">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                    <a href="/orders/{{$record->id}}" class="btn btn-sm btn-danger js_action_delete"><i class="fa fa-trash"></i></a>
+                                    <a href="/orders/{{$record->id}}" class="btn btn-sm btn-danger js_action_delete ml-2"><i class="fa fa-trash"></i></a>
                                 </div>
                             </td>
                         </tr>
